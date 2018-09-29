@@ -1,15 +1,17 @@
 {
   "name": "passive",
   "description": "detect passive",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/passive.es.js",
   "browser": "dist/passive.umd.js",
   "module": "dist/passive.es.js",
   "cjs": "dist/passive.cjs.js",
-  "dependencies": {
-  },
+  "dependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "rollup -c -w",
+    "build": "rm -rf dist && rollup -c && npm run minify",
+    "minify": "uglifyjs $npm_package_browser -cm -o $npm_package_browser",
+    "release": "npm run build && npm run minify && standard-version && git push --follow-tags && npm publish --access=public"
   },
   "repository": {
     "type": "git",
